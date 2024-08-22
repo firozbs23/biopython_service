@@ -1,0 +1,65 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Logs
+*.log
+
+# Compiled source
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# JetBrains (General)
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Other IDEs
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Backup files
+*.bak
+*.old
+*.orig
+*.save
+*.swp
+*.swo
+*.tmp
+*.temp
+
