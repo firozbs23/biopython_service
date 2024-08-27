@@ -38,7 +38,7 @@ def get_data():
         
         prompt = f'{title} {abstract}'
         
-        ai_data = find_ai_values(prompt=prompt)
+        ai_data =  {'ai' : 'demo'} # find_ai_values(prompt=prompt)
         
         response.append ({
             **pubmed_data, **ai_data
@@ -71,7 +71,7 @@ def get_data_by_pmid():
         
         prompt = f'{title} {abstract}'
         
-        ai_data = find_ai_values(prompt=prompt)
+        ai_data = {'ai' : 'demo'} # find_ai_values(prompt=prompt)
         
         response.append ({
             **pubmed_data, **ai_data
