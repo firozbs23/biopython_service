@@ -1,8 +1,11 @@
 from flask import Flask, request
+from flask_cors import CORS
 from biopython_service import get_pubmed_data, get_pubmed_data_by_pmid
+from utility.find_from_chat_gpt import find_ai_values
 
 # Create a Flask application
 app = Flask(__name__)
+CORS(app)
 
 
 # Define a route for the "Hello, World!" endpoint
@@ -17,8 +20,31 @@ def get_data():
     if not name:
         return "Parameter 'name' is missing or empty."
 
-    pubmed_data = get_pubmed_data(name)
-    return pubmed_data
+    data = get_pubmed_data(name)
+    response = []
+    
+    for pubmed_data in data:
+        try:
+            title = pubmed_data['title']
+        except:
+            title = ''
+    
+    
+        try:
+            abstract = pubmed_data['abstract']
+        except:
+            abstract = ''
+    
+        
+        prompt = f'{title} {abstract}'
+        
+        ai_data = find_ai_values(prompt=prompt)
+        
+        response.append ({
+            **pubmed_data, **ai_data
+        })
+    
+    return response
 
 @app.route('/pubmed/pmid')
 def get_data_by_pmid():
@@ -26,8 +52,41 @@ def get_data_by_pmid():
     if not pmid:
         return "Parameter 'pmid' is missing or empty."
 
-    pubmed_data = get_pubmed_data_by_pmid(pmid)
-    return pubmed_data
+    data = get_pubmed_data_by_pmid(pmid)
+    
+    response = []
+    
+    for pubmed_data in data:
+        try:
+            title = pubmed_data['title']
+        except:
+            title = ''
+    
+    
+        try:
+            abstract = pubmed_data['abstract']
+        except:
+            abstract = ''
+    
+        
+        prompt = f'{title} {abstract}'
+        
+        ai_data = find_ai_values(prompt=prompt)
+        
+        response.append ({
+            **pubmed_data, **ai_data
+        })
+    
+    return response
+
+
+@app.route('/chat-gpt')
+def chat_gpt():
+    prompt = request.args.get('prompt')
+    if not prompt:
+        return "Parameter 'prompt' is missing or empty."
+    response = find_ai_values(prompt)
+    return response
 
 
 # Run the Flask app

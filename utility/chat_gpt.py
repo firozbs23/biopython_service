@@ -1,7 +1,12 @@
 from time import sleep
 from openai import OpenAI
 
-api_key = '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'
+
+my_key = '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'
+# api_key = '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'
+
+api_key =  my_key
+
 client = OpenAI(api_key=api_key)
 
 
@@ -31,6 +36,7 @@ def ask_chat_gpt(input_data):
             if len(str(result)) > 0:
                 retry = max_retry
         except Exception as e:
+            print(e)
             error_msg = str(e)
             retry += 1
             sleep(sleep_time)
@@ -45,4 +51,4 @@ What are the country name and country iso2 code for this location: ` TEMPLE FACU
 7600 Central Ave, Philadelphia, PA 19111` ? I expect answer in json formet like `{"country" : "United States", "iso2" : "US"}` and I need only json data not other things.
 """
 
-# print(ask_chat_gpt(data))
+print(ask_chat_gpt(data))
